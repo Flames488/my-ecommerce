@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNova - Where Innovation Meets Everyday Shopping</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --royal-blue: #1E3A8A;
+            --white: #FFFFFF;
+            --slate-gray: #6B7280;
+            --light-gray: #F8FAFC;
+            --border-gray: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #374151;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--slate-gray);
+            border-radius: 4px;
+        }
+
+        /* Announcement Bar */
+        .announcement-bar {
+            background: var(--royal-blue);
+            color: white;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Navigation */
+        .navbar-custom {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--royal-blue) !important;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--royal-blue);
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 500px;
+        }
+
+        .search-input {
+            border: 2px solid var(--border-gray);
+            border-radius: 25px;
+            padding: 10px 50px 10px 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--royal-blue);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            color: white;
+        }
+
+        .nav-icon {
+            color: var(--slate-gray);
+            font-size: 18px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-icon:hover {
+            color: var(--royal-blue);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Bottom Navigation */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border-gray);
+            padding: 10px 0;
+            z-index: 1000;
+            display: none;
+        }
+
+        .mobile-nav-item {
+            text-align: center;
+            color: var(--slate-gray);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        .mobile-nav-item.active {
+            color: var(--royal-blue);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #3B82F6 100%);
+            color: white;
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-primary-custom {
+            background: white;
+            color: var(--royal-blue);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline-custom {
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: white;
+            color: var(--royal-blue);
+        }
+
+        /* Flash Sales */
+        .flash-sales {
+            background: var(--light-gray);
+            padding: 60px 0;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .countdown-item {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--royal-blue);
+        }
+
+        .countdown-label {
+            font-size: 12px;
+            color: var(--slate-gray);
+            text-transform: uppercase;
+        }
+
+        /* Category Cards */
+        .category-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .category-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--slate-gray);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--royal-blue);
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            color: var(--warning);
+            margin-bottom: 15px;
+        }
+
+        .btn-add-cart {
+            background: var(--royal-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-cart:hover {
+            background: #1E40AF;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--royal-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+
+        /* Newsletter */
+        .newsletter-section {
+            background: var(--royal-blue);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .newsletter-input {
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+        }
+
+        .newsletter-btn {
+            background: white;
+            color: var(--royal-blue);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1F2937;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-links a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        /* Page Navigation */
+        .page-nav {
+            background: white;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-gray);
+            margin-bottom: 30px;
+        }
+
+        .page-nav .nav-link {
+            color: var(--slate-gray);
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .page-nav .nav-link:hover,
+        .page-nav .nav-link.active {
+            background: var(--royal-blue);
+            color: white;
+        }
+
+        /* Filters Sidebar */
+        .filters-sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .filter-section {
+            margin-bottom: 30px;
+        }
+
+        .filter-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #374151;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--royal-blue);
+            border-color: var(--royal-blue);
+        }
+
+        /* Product Details */
+        .product-gallery {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            background: var(--light-gray);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: var(--slate-gray);
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            background: var(--light-gray);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .thumbnail.active {
+            border-color: var(--royal-blue);
+        }
+
+        .variant-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .variant-option {
+            padding: 10px 20px;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .variant-option.active {
+            border-color: var(--royal-blue);
+            background: var(--royal-blue);
+            color: white;
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .quantity-btn {
+            background: var(--border-gray);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-input {
+            width: 60px;
+            text-align: center;
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            padding: 10px;
+        }
+
+        /* Cart Page */
+        .cart-item {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        /* Checkout Steps */
+        .checkout-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-gray);
+            color: var(--slate-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .step.active .step-number {
+            background: var(--royal-blue);
+            color: white;
+        }
+
+        .step-line {
+            width: 50px;
+            height: 2px;
+            background: var(--border-gray);
+            margin: 0 20px;
+        }
+
+        .step.active .step-line {
+            background: var(--royal-blue);
+        }
+
+        /* Modal */
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-bottom-nav {
+                display: block;
+            }
+
+            body {
+                padding-bottom: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .countdown-timer {
+                flex-wrap: wrap;
+            }
+
+            .search-container {
+                max-width: 100%;
+                margin: 10px 0;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .filters-sidebar {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                height: 100vh;
+                width: 280px;
+                z-index: 1050;
+                transition: left 0.3s ease;
+                overflow-y: auto;
+            }
+
+            .filters-sidebar.show {
+                left: 0;
+            }
+
+            .filters-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                z-index: 1040;
+                display: none;
+            }
+
+            .filters-overlay.show {
+                display: block;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Skeleton Loader */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .skeleton-card {
+            height: 300px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background: #1F2937;
+            color: white;
+        }
+
+        .dark-mode .navbar-custom {
+            background: #374151;
+        }
+
+        .dark-mode .product-card,
+        .dark-mode .category-card,
+        .dark-mode .filters-sidebar,
+        .dark-mode .cart-item,
+        .dark-mode .cart-summary {
+            background: #374151;
+            color: white;
+        }
+
+        /* Live Chat Widget */
+        .chat-widget {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--royal-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+
+        /* Utility Classes */
+        .text-primary-custom {
+            color: var(--royal-blue) !important;
+        }
+
+        .bg-primary-custom {
+            background-color: var(--royal-blue) !important;
+        }
+
+        .border-primary-custom {
+            border-color: var(--royal-blue) !important;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <div class="announcement-bar">
+        <div class="container">
+            <p class="mb-0">🚚 Free shipping on orders over $50! Limited time offer.</p>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <span class="logo-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </span>
+                ShopNova
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#electronics">Electronics</a></li>
+                            <li><a class="dropdown-item" href="#fashion">Fashion</a></li>
+                            <li><a class="dropdown-item" href="#home">Home & Garden</a></li>
+                            <li><a class="dropdown-item" href="#sports">Sports</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <div class="search-container mx-auto">
+                    <input type="text" class="form-control search-input" placeholder="Search for products...">
+                    <button class="btn search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+
+                <div class="nav-icons d-none d-lg-flex">
+                    <a href="#" class="nav-icon position-relative">
+                        <i class="fas fa-heart"></i>
+                    </a>
+                    <a href="#cart" class="nav-icon position-relative">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">3</span>
+                    </a>
+                    <a href="#" class="nav-icon">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <button class="btn nav-icon" onclick="toggleDarkMode()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-nav d-none d-lg-block">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#home" onclick="showPage('home')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products" onclick="showPage('products')">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#product-detail" onclick="showPage('product-detail')">Product Detail</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cart" onclick="showPage('cart')">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#checkout" onclick="showPage('checkout')">Checkout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div id="home-page" class="page-content">
+            <section class="hero-section">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <div class="hero-content fade-in-up">
+                                <h1>Where Innovation Meets Everyday Shopping</h1>
+                                <p>Discover amazing products at unbeatable prices. Shop from thousands of brands and enjoy fast, free delivery.</p>
+                                <div class="d-flex gap-3">
+                                    <button class="btn btn-primary-custom" onclick="showPage('products')">Shop Now</button>
+                                    <button class="btn btn-outline-custom">Learn More</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="hero-image text-center">
+                                <i class="fas fa-shopping-cart" style="font-size: 8rem; opacity: 0.7;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="flash-sales">
+                <div class="container">
+                    <div class="text-center">
+                        <h2 class="section-title">⚡ Flash Sale</h2>
+                        <p class="lead">Hurry up! Limited time offers ending soon</p>
+                        
+                        <div class="countdown-timer">
+                            <div class="countdown-item">
+                                <div class="countdown-number">24</div>
+                                <div class="countdown-label">Hours</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-number">35</div>
+                                <div class="countdown-label">Minutes</div>
+                            </div>
+                            <div class="countdown-item">
+                                <div class="countdown-number">42</div>
+                                <div class="countdown-label">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-title">Gaming Laptop</h5>
+                                    <div class="product-price">$899 <del style="color: #9CA3AF;">$1299</del></div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        (4.5)
+                                    </div>
+                                    <button class="btn btn-add-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-title">Premium T-Shirt</h5>
+                                    <div class="product-price">$29 <del style="color: #9CA3AF;">$49</del></div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                        (4.0)
+                                    </div>
+                                    <button class="btn btn-add-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-headphones"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-title">Wireless Headphones</h5>
+                                    <div class="product-price">$199 <del style="color: #9CA3AF;">$299</del></div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        (5.0)
+                                    </div>
+                                    <button class="btn btn-add-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-watch"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h5 class="product-title">Smart Watch</h5>
+                                    <div class="product-price">$299 <del style="color: #9CA3AF;">$399</del></div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        (4.7)
+                                    </div>
+                                    <button class="btn btn-add-cart">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">Shop by Category</h2>
+                    <div class="row">
+                        <div class="col-md-3 mb-4">
+                            <div class="category-card">
+                                <div class="category-image">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <div class="p-4">
+                                    <h5 class="text-center">Electronics</h5>
+                                    <p class="text-center text-muted">Latest gadgets & tech</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="category-card">
+                                <div class="category-image">
+                                    <i class="fas fa-tshirt"></i>
+                                </div>
+                                <div class="p-4">
+                                    <h5 class="text-center">Fashion</h5>
+                                    <p class="text-center text-muted">Trendy clothing & accessories</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="category-card">
+                                <div class="category-image">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <div class="p-4">
+                                    <h5 class="text-center">Home & Garden</h5>
+                                    <p class="text-center text-muted">Make your house a home</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="category-card">
+                                <div class="category-image">
+                                    <i class="fas fa-dumbbell"></i>
+                                </div>
+                                <div class="p-4">
+                                    <h5 class="text-center">Sports & Fitness</h5>
+                                    <p class="text-center text-muted">Stay active & healthy</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding bg-light">
+                <div class="container">
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <h2 class="section-title mb-0">Trending Products</h2>
+                        <button class="btn btn-outline-primary">View All</button>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-camera"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Digital Camera</h6>
+                                    <div class="product-price">$549</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-shoe-prints"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Running Shoes</h6>
+                                    <div class="product-price">$89</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-coffee"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Coffee Maker</h6>
+                                    <div class="product-price">$129</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Best Seller Book</h6>
+                                    <div class="product-price">$19</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-gamepad"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Gaming Controller</h6>
+                                    <div class="product-price">$79</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-6 mb-4">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <i class="fas fa-chair"></i>
+                                </div>
+                                <div class="product-info">
+                                    <h6 class="product-title">Office Chair</h6>
+                                    <div class="product-price">$199</div>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <button class="btn btn-add-cart btn-sm">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container">
+                    <h2 class="section-title">What Our Customers Say</h2>
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="product-rating mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="mb-3">"Amazing products and fast delivery! ShopNova has become my go-to online store."</p>
+                                <h6 class="mb-0">Sarah Johnson</h6>
+                                <small class="text-muted">Verified Customer</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="product-rating mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="mb-3">"Great customer service and quality products. Highly recommended!"</p>
+                                <h6 class="mb-0">Mike Chen</h6>
+                                <small class="text-muted">Verified Customer</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="product-rating mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="mb-3">"Love the user-friendly website and competitive prices. Will shop again!"</p>
+                                <h6 class="mb-0">Emily Davis</h6>
+                                <small class="text-muted">Verified Customer</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="newsletter-section">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-6 text-center">
+                            <h2 class="mb-3">Stay Updated</h2>
+                            <p class="mb-4">Subscribe to our newsletter and get exclusive deals and updates!</p>
+                            <div class="d-flex justify-content-center">
+                                <input type="email" class="form-control newsletter-input" placeholder="Enter your email">
+                                <button class="btn newsletter-btn">Subscribe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="products-page" class="page-content" style="display: none;">
+            <div class="container mt-4">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="filters-sidebar">
+                            <h5 class="filter-title">Filters</h5>
+                            
+                            <div class="filter-section">
+                                <h6 class="filter-title">Price Range</h6>
+                                <input type="range" class="form-range" min="0" max="2000" value="500" id="priceRange">
+                                <div class="d-flex justify-content-between">
+                                    <span>$0</span>
+                                    <span id="priceValue">$500</span>
+                                    <span>$2000</span>
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <h6 class="filter-title">Categories</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="electronics-filter">
+                                    <label class="form-check-label" for="electronics-filter">Electronics</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="fashion-filter">
+                                    <label class="form-check-label" for="fashion-filter">Fashion</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="home-filter">
+                                    <label class="form-check-label" for="home-filter">Home & Garden</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="sports-filter">
+                                    <label class="form-check-label" for="sports-filter">Sports</label>
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <h6 class="filter-title">Brand</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="apple-filter">
+                                    <label class="form-check-label" for="apple-filter">Apple</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="samsung-filter">
+                                    <label class="form-check-label" for="samsung-filter">Samsung</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="nike-filter">
+                                    <label class="form-check-label" for="nike-filter">Nike</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="adidas-filter">
+                                    <label class="form-check-label" for="adidas-filter">Adidas</label>
+                                </div>
+                            </div>
+
+                            <div class="filter-section">
+                                <h6 class="filter-title">Rating</h6>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating5-filter">
+                                    <label class="form-check-label" for="rating5-filter">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating4-filter">
+                                    <label class="form-check-label" for="rating4-filter">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
+                                        & Up
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rating3-filter">
+                                    <label class="form-check-label" for="rating3-filter">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="fas fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
+                                        <i class="far fa-star text-warning"></i>
+                                        & Up
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-9">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <h4>All Products</h4>
+                                <p class="text-muted">Showing 1-12 of 156 results</p>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <button class="btn btn-outline-primary d-lg-none" onclick="toggleFilters()">
+                                    <i class="fas fa-filter"></i> Filters
+                                </button>
+                                <select class="form-select" style="width: auto;">
+                                    <option>Sort by: Featured</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>New Arrivals</option>
+                                    <option>Best Sellers</option>
+                                    <option>Top Rated</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row" id="products-grid">
+                            </div>
+
+                        <nav aria-label="Product pagination" class="mt-5">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1">Previous</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="product-detail-page" class="page-content" style="display: none;">
+            <div class="container mt-4">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#home">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#products">Electronics</a></li>
+                        <li class="breadcrumb-item active">Gaming Laptop</li>
+                    </ol>
+                </nav>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="product-gallery">
+                            <div class="main-image">
+                                <i class="fas fa-laptop"></i>
+                            </div>
+                            <div class="thumbnail-images">
+                                <div class="thumbnail active">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="thumbnail">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="thumbnail">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                                <div class="thumbnail">
+                                    <i class="fas fa-laptop"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="product-details">
+                            <h1 class="product-title">Premium Gaming Laptop</h1>
+                            <div class="product-rating mb-3">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span class="ms-2">4.5 (234 reviews)</span>
+                            </div>
+                            <div class="product-price mb-3">
+                                <span class="h2 text-primary-custom">$899</span>
+                                <del class="text-muted ms-2">$1299</del>
+                                <span class="badge bg-success ms-2">31% OFF</span>
+                            </div>
+
+                            <div class="product-description mb-4">
+                                <p>Experience ultimate gaming performance with this premium laptop featuring:</p>
+                                <ul>
+                                    <li>Intel Core i7 processor</li>
+                                    <li>16GB RAM</li>
+                                    <li>1TB SSD storage</li>
+                                    <li>NVIDIA GeForce RTX graphics</li>
+                                    <li>15.6" Full HD display</li>
+                                </ul>
+                            </div>
+
+                            <div class="product-options">
+                                <div class="mb-3">
+                                    <label class="form-label">Color:</label>
+                                    <div class="variant-selector">
+                                        <div class="variant-option active">Black</div>
+                                        <div class="variant-option">Silver</div>
+                                        <div class="variant-option">White</div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Storage:</label>
+                                    <div class="variant-selector">
+                                        <div class="variant-option">512GB</div>
+                                        <div class="variant-option active">1TB</div>
+                                        <div class="variant-option">2TB</div>
+                                    </div>
+                                </div>
+
+                                <div class="quantity-selector">
+                                    <label class="form-label">Quantity:</label>
+                                    <div class="d-flex align-items-center">
+                                        <button class="quantity-btn" onclick="changeQuantity(-1)">
+                                            <i class="fas fa-minus"></i>
+                                        </button>
+                                        <input type="number" class="quantity-input" value="1" min="1" max="10">
+                                        <button class="quantity-btn" onclick="changeQuantity(1)">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="product-actions mt-4">
+                                    <button class="btn btn-primary-custom btn-lg me-3" style="background: var(--royal-blue);">
+                                        <i class="fas fa-cart-plus me-2"></i>Add to Cart
+                                    </button>
+                                    <button class="btn btn-outline-primary btn-lg">
+                                        <i class="fas fa-bolt me-2"></i>Buy Now
+                                    </button>
+                                </div>
+
+                                <div class="product-info mt-4">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-truck text-primary-custom me-2"></i>
+                                                <span>Free shipping on orders over $50</span>
+                                            </div>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-undo text-primary-custom me-2"></i>
+                                                <span>30-day return policy</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-shield-alt text-primary-custom me-2"></i>
+                                                <span>2-year warranty</span>
+                                            </div>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-clock text-primary-custom me-2"></i>
+                                                <span>Delivery: 3-5 business days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3>Customer Reviews</h3>
+                        <div class="reviews-summary mb-4">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="text-center">
+                                        <h2 class="display-4">4.5</h2>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                        <p class="text-muted">Based on 234 reviews</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="rating-breakdown">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">5 stars</span>
+                                            <div class="progress flex-grow-1 me-2">
+                                                <div class="progress-bar bg-warning" style="width: 70%"></div>
+                                            </div>
+                                            <span>70%</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">4 stars</span>
+                                            <div class="progress flex-grow-1 me-2">
+                                                <div class="progress-bar bg-warning" style="width: 20%"></div>
+                                            </div>
+                                            <span>20%</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">3 stars</span>
+                                            <div class="progress flex-grow-1 me-2">
+                                                <div class="progress-bar bg-warning" style="width: 7%"></div>
+                                            </div>
+                                            <span>7%</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">2 stars</span>
+                                            <div class="progress flex-grow-1 me-2">
+                                                <div class="progress-bar bg-warning" style="width: 2%"></div>
+                                            </div>
+                                            <span>2%</span>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-2">
+                                            <span class="me-2">1 star</span>
+                                            <div class="progress flex-grow-1 me-2">
+                                                <div class="progress-bar bg-warning" style="width: 1%"></div>
+                                            </div>
+                                            <span>1%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="reviews-list">
+                            <div class="review-item border-bottom pb-3 mb-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <div class="review-avatar me-3">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0">John Smith</h6>
+                                        <div class="product-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>Excellent laptop! Great performance for gaming and work. Highly recommend!</p>
+                                <small class="text-muted">Verified Purchase • 2 days ago</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
